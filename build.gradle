@@ -1,7 +1,8 @@
 plugins {
-	id 'org.springframework.boot' version '2.3.4.RELEASE'
-	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
-	id 'java'
+  id 'org.springframework.boot' version '2.3.4.RELEASE'
+  id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+  id 'com.diffplug.gradle.spotless' version '3.25.0'
+  id 'java'
 }
 
 group = 'tech.pegasys.net'
@@ -9,25 +10,51 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+  compileOnly {
+    extendsFrom annotationProcessor
+  }
 }
 
 repositories {
-	mavenCentral()
+  mavenCentral()
+}
+
+apply plugin: 'com.diffplug.gradle.spotless'
+
+spotless {
+  java {
+    // This path needs to be relative to each project
+    target fileTree('.') {
+      include '**/src/*/java/**/*.java'
+      exclude '**/.gradle/**'
+    }
+    removeUnusedImports()
+    googleJavaFormat('1.7')
+    importOrder 'java', ''
+    trimTrailingWhitespace()
+    endWithNewline()
+  }
+  groovyGradle {
+    target '*.gradle'
+    greclipse().configFile(rootProject.file('gradle/formatter.properties'))
+    endWithNewline()
+    paddedCell()
+  }
+
+  // Below this line are currently only license header tasks
+  format 'groovy', { target '**/src/*/grovy/**/*.groovy' }
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation('org.springframework.boot:spring-boot-starter-test') {
-		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
-	}
+  implementation 'org.springframework.boot:spring-boot-starter-actuator'
+  implementation 'org.springframework.boot:spring-boot-starter-web'
+  compileOnly 'org.projectlombok:lombok'
+  annotationProcessor 'org.projectlombok:lombok'
+  testImplementation('org.springframework.boot:spring-boot-starter-test') {
+    exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+  }
 }
 
 test {
-	useJUnitPlatform()
+  useJUnitPlatform()
 }
