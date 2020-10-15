@@ -16,7 +16,7 @@ The process is the following:
 - receive Ethereum transactions parameter through the REST API
 - encode transactions according to RLP definition
 - sign transactions
-- submit transactions to the Ethereum client using `eth_sendRarTransaction` RPC endpoint
+- submit transactions to the Ethereum client using `eth_sendRawTransaction` RPC endpoint
 
 ## Installation
 
