@@ -3,16 +3,20 @@ package tech.pegasys.net.txapigw.model;
 import java.math.BigInteger;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 @Getter
+@Setter
+@NoArgsConstructor
 @ToString(callSuper = true)
 public class EIP1559Transaction extends Transaction {
-  private final BigInteger minerBribe;
-  private final BigInteger feecap;
+  private BigInteger minerBribe;
+  private BigInteger feecap;
 
   public EIP1559Transaction(
-      final long nonce,
+      final BigInteger nonce,
       final String to,
       final BigInteger value,
       final BigInteger gasLimit,

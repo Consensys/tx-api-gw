@@ -53,7 +53,8 @@ dependencies {
   implementation 'org.springframework.boot:spring-boot-starter-actuator'
   implementation 'org.springframework.boot:spring-boot-starter-web'
   implementation 'org.springdoc:springdoc-openapi-ui:1.4.8'
-
+  implementation 'org.web3j:core:5.0.0'
+  implementation 'com.squareup.okhttp3:okhttp:4.7.2'
   compileOnly 'org.projectlombok:lombok'
   annotationProcessor 'org.projectlombok:lombok'
   testImplementation('org.springframework.boot:spring-boot-starter-test') {

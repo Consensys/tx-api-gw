@@ -12,7 +12,5 @@ public class RPCClient {
   @Value("${rpc-url:http://localhost:8545}")
   private String rpcUrl;
 
-  public void ethSendRawTransaction(final String signedTransaction) {
-    LOG.info("rpc url: {}", rpcUrl);
-  }
+  public void ethSendRawTransaction(final String signedTransaction) {}
 }
