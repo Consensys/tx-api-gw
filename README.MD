@@ -27,7 +27,13 @@ The process is the following:
 ## Usage
 
 ```shell script
-./gradlew bootRun
+java -jar java -jar build/libs/tx-api-gw.jar --rpc-url=http://127.0.0.1:8545
+```
+
+OR
+
+```shell script
+./gradlew bootRun --args="--rpc-url=http://127.0.0.1:8545"
 ```
 
 ## API

@@ -45,6 +45,10 @@ spotless {
   format 'groovy', { target '**/src/*/grovy/**/*.groovy' }
 }
 
+bootJar {
+  archiveFileName = "${archiveBaseName.get()}.${archiveExtension.get()}"
+}
+
 dependencies {
   implementation 'org.springframework.boot:spring-boot-starter-actuator'
   implementation 'org.springframework.boot:spring-boot-starter-web'
