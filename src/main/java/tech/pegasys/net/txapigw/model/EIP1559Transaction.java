@@ -4,9 +4,13 @@ import java.math.BigInteger;
 import javax.validation.constraints.NotNull;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 @ToString(callSuper = true)
+@Getter
+@Setter
 public class EIP1559Transaction extends Transaction {
   @Schema(example = "1000", required = true, description = "the miner bribe, in WEI")
   @NotNull
@@ -27,22 +31,6 @@ public class EIP1559Transaction extends Transaction {
       final BigInteger feecap) {
     super(nonce, to, value, null, gasLimit);
     this.minerBribe = minerBribe;
-    this.feecap = feecap;
-  }
-
-  public BigInteger getMinerBribe() {
-    return minerBribe;
-  }
-
-  public void setMinerBribe(BigInteger minerBribe) {
-    this.minerBribe = minerBribe;
-  }
-
-  public BigInteger getFeecap() {
-    return feecap;
-  }
-
-  public void setFeecap(BigInteger feecap) {
     this.feecap = feecap;
   }
 }
