@@ -21,5 +21,5 @@ import io.swagger.v3.oas.annotations.servers.Server;
                 @Contact(name = "Abdelhamid Bakhta", email = "abdelhamid.bakhta@consensys.net"),
             license =
                 @License(name = "Apache-2.0", url = "http://www.apache.org/licenses/LICENSE-2.0")),
-    servers = @Server(url = "http://localhost:8080"))
+    servers = {@Server(url = "http://localhost:8080"), @Server(url = "http://3.15.202.121:8080")})
 public class OpenAPIConfiguration {}
