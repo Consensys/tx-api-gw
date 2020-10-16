@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.http.HttpService;
+import tech.pegasys.net.txapigw.service.rpc.RPCClient;
 
 @Configuration
 public class TxApiGwConfiguration {
@@ -14,5 +15,10 @@ public class TxApiGwConfiguration {
   @Bean
   public Web3j web3j() {
     return Web3j.build(new HttpService(rpcUrl));
+  }
+
+  @Bean
+  public RPCClient rpcClient() {
+    return new RPCClient(rpcUrl);
   }
 }

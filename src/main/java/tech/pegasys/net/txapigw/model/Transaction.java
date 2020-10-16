@@ -6,15 +6,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
 
-@Getter
-@Setter
 @ToString
-@NoArgsConstructor
 public class Transaction {
   @NotNull private BigInteger nonce;
 
@@ -47,6 +41,46 @@ public class Transaction {
     this.to = to;
     this.value = value;
     this.gasPrice = gasPrice;
+    this.gasLimit = gasLimit;
+  }
+
+  public BigInteger getNonce() {
+    return nonce;
+  }
+
+  public void setNonce(BigInteger nonce) {
+    this.nonce = nonce;
+  }
+
+  public String getTo() {
+    return to;
+  }
+
+  public void setTo(String to) {
+    this.to = to;
+  }
+
+  public BigInteger getValue() {
+    return value;
+  }
+
+  public void setValue(BigInteger value) {
+    this.value = value;
+  }
+
+  public BigInteger getGasPrice() {
+    return gasPrice;
+  }
+
+  public void setGasPrice(BigInteger gasPrice) {
+    this.gasPrice = gasPrice;
+  }
+
+  public BigInteger getGasLimit() {
+    return gasLimit;
+  }
+
+  public void setGasLimit(BigInteger gasLimit) {
     this.gasLimit = gasLimit;
   }
 }
