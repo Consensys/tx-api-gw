@@ -15,7 +15,7 @@ info:
 servers:
   - url: http://localhost:8080
     variables: {}
-  - url: http://3.15.202.121:8080
+  - url: http://3.129.20.241:8080
     variables: {}
 paths:
   /basefee:
