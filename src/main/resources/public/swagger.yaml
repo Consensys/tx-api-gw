@@ -1,10 +1,20 @@
 openapi: 3.0.1
 info:
-  title: OpenAPI definition
-  version: v0
+  title: 'This module is a standalone HTTP service enabling to submit Ethereum transactions. '
+  description: |+
+    This component aims to help with the development of EIP-1559 since there are no wallet providers nor web3 libraries supporting new format transactions.
+
+    Don't use it in production and use only debug private keys.
+
+  contact:
+    name: Abdelhamid Bakhta
+    email: abdelhamid.bakhta@consensys.net
+  license:
+    name: Apache-2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
 servers:
-  - url: http://127.0.0.1:8080/v3/
-    description: Generated server url
+  - url: http://localhost:8080
+    variables: {}
 paths:
   /basefee:
     get:

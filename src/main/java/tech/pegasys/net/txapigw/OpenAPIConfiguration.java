@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
 @OpenAPIDefinition(
     info =
         @Info(
+            version = "",
             title =
                 "This module is a standalone HTTP service enabling to submit Ethereum transactions. ",
             description =
@@ -17,10 +18,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
                     + "Don't use it in production and use only debug private keys.\n"
                     + "\n",
             contact =
-                @Contact(
-                    name = "Abdelhamid Bakhta",
-                    url = "https://consensys.net/",
-                    email = "abdelhamid.bakhta@consensys.net"),
+                @Contact(name = "Abdelhamid Bakhta", email = "abdelhamid.bakhta@consensys.net"),
             license =
                 @License(name = "Apache-2.0", url = "http://www.apache.org/licenses/LICENSE-2.0")),
     servers = @Server(url = "http://localhost:8080"))
