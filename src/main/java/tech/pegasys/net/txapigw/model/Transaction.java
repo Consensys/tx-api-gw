@@ -1,6 +1,9 @@
 package tech.pegasys.net.txapigw.model;
 
 import java.math.BigInteger;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,11 +15,15 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 public class Transaction {
-  private BigInteger nonce;
+  @NotNull private BigInteger nonce;
+
+  @NotBlank
+  @Size(min = 42, max = 42)
   private String to;
-  private BigInteger value;
+
+  @NotNull private BigInteger value;
   private BigInteger gasPrice;
-  private BigInteger gasLimit;
+  @NotNull private BigInteger gasLimit;
 
   public Transaction(
       final BigInteger nonce,

@@ -1,6 +1,7 @@
 package tech.pegasys.net.txapigw.model;
 
 import java.math.BigInteger;
+import javax.validation.constraints.NotNull;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -12,8 +13,8 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString(callSuper = true)
 public class EIP1559Transaction extends Transaction {
-  private BigInteger minerBribe;
-  private BigInteger feecap;
+  @NotNull private BigInteger minerBribe;
+  @NotNull private BigInteger feecap;
 
   public EIP1559Transaction(
       final BigInteger nonce,
