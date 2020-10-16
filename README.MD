@@ -43,3 +43,17 @@ OR
 Go to http://localhost:8080 to see the API definition in a web browser.
 
 API docs specification are available at http://localhost:8080/v3/api-docs
+
+## Docker
+
+### Build image
+
+```shell script
+./gradlew bootBuildImage --imageName=$IMAGE_NAME
+```
+
+### Run container
+
+```shell script
+docker run -p 8080:8080 -t $IMAGE_NAME
+```
