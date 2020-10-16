@@ -3,6 +3,7 @@ package tech.pegasys.net.txapigw.model;
 import java.math.BigInteger;
 import javax.validation.constraints.NotNull;
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,8 +14,15 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString(callSuper = true)
 public class EIP1559Transaction extends Transaction {
-  @NotNull private BigInteger minerBribe;
-  @NotNull private BigInteger feecap;
+  @Schema(example = "1000", required = true, description = "the miner bribe, in WEI")
+  @NotNull
+  private BigInteger minerBribe;
+
+  @Schema(
+      example = "1000000000",
+      description = "the maximum of ETH the user is willing to pay for the transaction, in WEI")
+  @NotNull
+  private BigInteger feecap;
 
   public EIP1559Transaction(
       final BigInteger nonce,

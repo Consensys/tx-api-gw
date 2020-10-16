@@ -1,5 +1,7 @@
 package tech.pegasys.net.txapigw.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,15 +21,21 @@ import tech.pegasys.net.txapigw.service.TransactionService;
 public class TxController {
   @Autowired private TransactionService transactionService;
 
+  @Operation(summary = "Submit a legacy Ethereum transaction")
   @PostMapping(path = "/legacy/{privateKey}")
   public void submitTransaction(
-      @PathVariable String privateKey, @RequestBody final Transaction transaction) {
+      @Parameter(description = "private key to use to sign the transaction") @PathVariable
+          String privateKey,
+      @RequestBody final Transaction transaction) {
     transactionService.submit(privateKey, transaction);
   }
 
+  @Operation(summary = "Submit an EIP-1559 Ethereum transaction")
   @PostMapping(path = "/eip1559/{privateKey}")
   public void submitTransaction(
-      @PathVariable String privateKey, @RequestBody final EIP1559Transaction transaction) {
+      @Parameter(description = "private key to use to sign the transaction") @PathVariable
+          String privateKey,
+      @RequestBody final EIP1559Transaction transaction) {
     transactionService.submit(privateKey, transaction);
   }
 }

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalControllerExceptionHandler {
   @ExceptionHandler(TxApiGwException.class)
-  @ResponseStatus(HttpStatus.INSUFFICIENT_STORAGE)
+  @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
   public ExceptionResponseBody handle(TxApiGwException ex) {
     return ex.toResponseBody();
   }
