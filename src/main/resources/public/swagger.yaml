@@ -1,0 +1,148 @@
+---
+openapi: "3.0.1"
+info:
+  title: "OpenAPI definition"
+  version: "v0"
+servers:
+  - url: "http://127.0.0.1:8080"
+    description: "Generated server url"
+paths:
+  /tx/legacy/{privateKey}:
+    post:
+      tags:
+        - "tx-controller"
+      summary: "Submit a legacy Ethereum transaction"
+      operationId: "submitTransaction"
+      parameters:
+        - name: "privateKey"
+          in: "path"
+          description: "private key to use to sign the transaction"
+          required: true
+          style: "simple"
+          explode: false
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Transaction"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+        "500":
+          description: "Internal Server Error"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ExceptionResponseBody"
+  /tx/eip1559/{privateKey}:
+    post:
+      tags:
+        - "tx-controller"
+      summary: "Submit an EIP-1559 Ethereum transaction"
+      operationId: "submitTransaction_1"
+      parameters:
+        - name: "privateKey"
+          in: "path"
+          description: "private key to use to sign the transaction"
+          required: true
+          style: "simple"
+          explode: false
+          schema:
+            type: "string"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EIP1559Transaction"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+        "500":
+          description: "Internal Server Error"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/ExceptionResponseBody"
+components:
+  schemas:
+    ExceptionResponseBody:
+      type: "object"
+      properties:
+        errorCode:
+          type: "integer"
+          format: "int32"
+        errorLabel:
+          type: "string"
+        errorMessage:
+          type: "string"
+    Transaction:
+      required:
+        - "gasLimit"
+        - "nonce"
+        - "to"
+        - "value"
+      type: "object"
+      properties:
+        nonce:
+          type: "integer"
+        to:
+          maxLength: 42
+          minLength: 42
+          type: "string"
+          description: "the recipient address"
+          example: "0x61aCB88dA0DBA1A43592f7cc548b3319Fa615e1b"
+        value:
+          type: "integer"
+          description: "the amount of ETH to send, in WEI"
+          example: 1000000
+        gasPrice:
+          type: "integer"
+          description: "the gas price of the transaction, in WEI"
+          example: 1000
+        gasLimit:
+          type: "integer"
+          description: "the gas limit of the transaction"
+          example: 21000
+    EIP1559Transaction:
+      required:
+        - "feecap"
+        - "gasLimit"
+        - "minerBribe"
+        - "nonce"
+        - "to"
+        - "value"
+      type: "object"
+      properties:
+        nonce:
+          type: "integer"
+        to:
+          maxLength: 42
+          minLength: 42
+          type: "string"
+          description: "the recipient address"
+          example: "0x61aCB88dA0DBA1A43592f7cc548b3319Fa615e1b"
+        value:
+          type: "integer"
+          description: "the amount of ETH to send, in WEI"
+          example: 1000000
+        gasPrice:
+          type: "integer"
+          description: "the gas price of the transaction, in WEI"
+          example: 1000
+        gasLimit:
+          type: "integer"
+          description: "the gas limit of the transaction"
+          example: 21000
+        minerBribe:
+          type: "integer"
+          description: "the miner bribe, in WEI"
+          example: 1000
+        feecap:
+          type: "integer"
+          description: "the maximum of ETH the user is willing to pay for the transaction,\
+            \ in WEI"
+          example: 1000000000
