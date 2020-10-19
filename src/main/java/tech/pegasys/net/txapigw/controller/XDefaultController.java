@@ -11,17 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class XDefaultController {
 
-  /*@Override
-  public String getErrorPath() {
-    return "/error";
-  }*/
-
-  /*@RequestMapping("/error")
-  public void handleErrorWithRedirect(HttpServletResponse response) throws IOException {
-    response.sendRedirect("/swagger-ui.html");
-  }*/
-
-  @RequestMapping(value = "/")
+    @RequestMapping(value = "/")
   public void redirect(HttpServletResponse response) throws IOException {
     response.sendRedirect("/swagger-ui.html");
   }
