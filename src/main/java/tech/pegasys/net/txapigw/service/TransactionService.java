@@ -22,14 +22,20 @@ public class TransactionService {
   @Autowired private TransactionSigner signer;
 
   public void submit(final String privateKey, final Transaction transaction) {
-    process(privateKey, transaction);
+    try {
+      LOG.info("submit transaction: {}", transaction.toString());
+      final byte[] signedTransaction = signer.sign(privateKey, transaction);
+      final EthSendTransaction response =
+          web3.ethSendRawTransaction(Numeric.toHexString(signedTransaction)).send();
+      LOG.info("transaction sent: {}", response.getTransactionHash());
+
+    } catch (final IOException e) {
+      LOG.error("cannot submit transaction", e);
+      throw new TxApiGwException(ErrorCode.ETHEREUM_CLIENT_ERROR, e);
+    }
   }
 
   public void submit(final String privateKey, final EIP1559Transaction transaction) {
-    process(privateKey, transaction);
-  }
-
-  private <T extends Transaction> void process(final String privateKey, final T transaction) {
     try {
       LOG.info("submit transaction: {}", transaction.toString());
       final byte[] signedTransaction = signer.sign(privateKey, transaction);
