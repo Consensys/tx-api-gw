@@ -1,4 +1,4 @@
-package tech.pegasys.net.txapigw.api.response;
+package tech.pegasys.net.txapigw.api.response.block;
 
 import lombok.Data;
 

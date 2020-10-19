@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class XDefaultController {
 
-    @RequestMapping(value = "/")
+  @RequestMapping(value = "/")
   public void redirect(HttpServletResponse response) throws IOException {
     response.sendRedirect("/swagger-ui.html");
   }

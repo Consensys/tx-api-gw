@@ -1,41 +1,35 @@
-package tech.pegasys.net.txapigw.controller;
+package tech.pegasys.net.txapigw.api;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import tech.pegasys.net.txapigw.api.response.transaction.SubmitTransactionResponse;
 import tech.pegasys.net.txapigw.model.EIP1559Transaction;
 import tech.pegasys.net.txapigw.model.Transaction;
-import tech.pegasys.net.txapigw.service.TransactionService;
 
-@RestController
 @RequestMapping(
     path = "/tx",
     produces = MediaType.APPLICATION_JSON_VALUE,
     consumes = MediaType.APPLICATION_JSON_VALUE)
-public class TxController {
-  @Autowired private TransactionService transactionService;
+@Tag(name = "Transaction API", description = "Transaction Web API documentation")
+public interface TransactionAPI {
 
   @Operation(summary = "Submit a legacy Ethereum transaction")
   @PostMapping(path = "/legacy/{privateKey}")
-  public void submitTransaction(
+  SubmitTransactionResponse submitTransaction(
       @Parameter(description = "private key to use to sign the transaction") @PathVariable
           String privateKey,
-      @RequestBody final Transaction transaction) {
-    transactionService.submit(privateKey, transaction);
-  }
+      @RequestBody final Transaction transaction);
 
   @Operation(summary = "Submit an EIP-1559 Ethereum transaction")
   @PostMapping(path = "/eip1559/{privateKey}")
-  public void submitTransaction(
+  SubmitTransactionResponse submitTransaction(
       @Parameter(description = "private key to use to sign the transaction") @PathVariable
           String privateKey,
-      @RequestBody final EIP1559Transaction transaction) {
-    transactionService.submit(privateKey, transaction);
-  }
+      @RequestBody final EIP1559Transaction transaction);
 }

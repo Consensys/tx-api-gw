@@ -4,17 +4,15 @@ import java.io.IOException;
 import java.util.Objects;
 
 import com.jayway.jsonpath.JsonPath;
+import lombok.extern.slf4j.Slf4j;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import tech.pegasys.net.txapigw.service.TransactionService;
 
+@Slf4j
 public class RPCClient {
-  private static final Logger LOG = LoggerFactory.getLogger(TransactionService.class);
   private static final MediaType JSON = MediaType.parse("application/json");
 
   private final String rpcEndpoint;
@@ -58,7 +56,7 @@ public class RPCClient {
       return JsonPath.parse(call(RpcMethodTemplate.ETH_GET_BLOCK_BY_NUMBER.format(block)))
           .read("$.result.baseFee");
     } catch (final Exception e) {
-      LOG.error("error retrieving base fee", e);
+      log.error("error retrieving base fee", e);
       return null;
     }
   }
