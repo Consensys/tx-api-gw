@@ -5,12 +5,14 @@ import javax.validation.constraints.NotNull;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 @ToString(callSuper = true)
 @Getter
 @Setter
+@NoArgsConstructor
 public class EIP1559Transaction extends Transaction {
   @Schema(example = "1000", required = true, description = "the miner bribe, in WEI")
   @NotNull
