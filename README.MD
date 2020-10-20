@@ -1,6 +1,6 @@
 [![tx-api-gw Actions Status](https://github.com/abdelhamidbakhta/tx-api-gw/workflows/tx-api-gw-ci/badge.svg)](https://github.com/abdelhamidbakhta/tx-api-gw/actions)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=abdelhamidbakhta_tx-api-gw&metric=alert_status)](https://sonarcloud.io/dashboard?id=abdelhamidbakhta_tx-api-gw)
-[![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/dashboard?id=abdelhamidbakhta_tx-api-gw)
+<img src="https://sonarcloud.io/images/project_badges/sonarcloud-white.svg" alt="SonarCloud" width="100" >
 # Transaction API Gateway
 
 ## Description
