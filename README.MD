@@ -1,5 +1,6 @@
 [![tx-api-gw Actions Status](https://github.com/abdelhamidbakhta/tx-api-gw/workflows/tx-api-gw-ci/badge.svg)](https://github.com/abdelhamidbakhta/tx-api-gw/actions)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=abdelhamidbakhta_tx-api-gw&metric=alert_status)](https://sonarcloud.io/dashboard?id=abdelhamidbakhta_tx-api-gw)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/abdelhamidbakhta/tx-api-gw/blob/master/LICENSE)
 <img src="https://sonarcloud.io/images/project_badges/sonarcloud-white.svg" alt="SonarCloud" width="100" >
 # Transaction API Gateway
 
@@ -23,6 +24,12 @@ The process is the following:
 
 ## Installation
 
+### Install Prerequisites
+
+* Java 11
+
+### Build Instructions
+
 ```shell script
 ./gradlew assemble
 ```
@@ -38,6 +45,16 @@ OR
 ```shell script
 ./gradlew bootRun --args="--rpc-url=http://127.0.0.1:8545"
 ```
+
+## Code Style
+
+We use Google's Java coding conventions for the project. To reformat code, run: 
+
+```shell script 
+./gradlew spotlessApply
+```
+
+Code style is checked automatically during a build.
 
 ## API
 
