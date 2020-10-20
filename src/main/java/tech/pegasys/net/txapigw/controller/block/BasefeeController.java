@@ -13,7 +13,7 @@ public class BasefeeController implements BasefeeAPI {
   @Autowired private RPCClient rpcClient;
 
   public @ResponseBody GetBasefeeResponse getBaseFee() {
-    return new GetBasefeeResponse(rpcClient.getBasefee("latest"));
+    return new GetBasefeeResponse(rpcClient.getBasefee());
   }
 
   public @ResponseBody GetBasefeeResponse getBaseFee(final String block) {
