@@ -1,3 +1,5 @@
+[![tx-api-gw Actions Status](https://github.com/abdelhamidbakhta/tx-api-gw/workflows/tx-api-gw-ci/badge.svg)](https://github.com/abdelhamidbakhta/tx-api-gw/actions)
+
 # Transaction API Gateway
 
 ## Description

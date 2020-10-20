@@ -1,4 +1,4 @@
-name: Transaction API Gateway CI
+name: tx-api-gw-ci
 
 on: [push, pull_request]
 
