@@ -57,3 +57,9 @@ API docs specification are available at http://localhost:8080/v3/api-docs
 ```shell script
 docker run -p 8080:8080 -t $IMAGE_NAME
 ```
+
+### Use existing image
+
+```shell script
+docker run -p 8080:8080 abdelhamidbakhtaconsensys/tx-api-gw:latest
+```
