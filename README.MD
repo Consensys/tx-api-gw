@@ -48,6 +48,12 @@ API docs specification are available at http://localhost:8080/v3/api-docs
 
 ### Build image
 
+#### Using plain docker file
+```shell script
+docker build -t $IMAGE_NAME .
+```
+
+#### Using gradle task
 ```shell script
 ./gradlew bootBuildImage --imageName=$IMAGE_NAME
 ```

@@ -14,6 +14,14 @@ ${AnsiColor.GREEN}
                      #     # #      #    # #    #
                      ######  ######  ####   ####
 
+${AnsiColor.MAGENTA}
+       ____    _______      _______
+___  _/_   |   \   _  \     \   _  \
+\  \/ /|   |   /  /_\  \    /  /_\  \
+ \   / |   |   \  \_/   \   \  \_/   \
+  \_/  |___| /\ \_____  / /\ \_____  /
+             \/       \/  \/       \/
+
 ${AnsiColor.CYAN}
 https://eips.ethereum.org/EIPS/eip-1559
 ${AnsiColor.DEFAULT}
