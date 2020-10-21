@@ -33,6 +33,13 @@ sonarqube {
 
 tasks['sonarqube'].dependsOn test
 
+jacocoTestReport {
+  reports {
+    xml.enabled true
+  }
+}
+test.finalizedBy jacocoTestReport
+
 spotless {
   java {
     // This path needs to be relative to each project
