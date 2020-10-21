@@ -64,6 +64,8 @@ Go to http://localhost:8080 to see the API definition in a web browser.
 
 API docs specification are available at http://localhost:8080/v3/api-docs
 
+Online version of the API can be found at http://eip1559-tx.ops.pegasys.tech:8080
+
 ## Docker
 
 ### Build image
