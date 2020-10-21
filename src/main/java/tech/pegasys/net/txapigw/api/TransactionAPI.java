@@ -1,5 +1,7 @@
 package tech.pegasys.net.txapigw.api;
 
+import javax.validation.Valid;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -24,12 +26,12 @@ public interface TransactionAPI {
   SubmitTransactionResponse submitTransaction(
       @Parameter(description = "private key to use to sign the transaction") @PathVariable
           String privateKey,
-      @RequestBody final Transaction transaction);
+      @Valid @RequestBody final Transaction transaction);
 
   @Operation(summary = "Submit an EIP-1559 Ethereum transaction")
   @PostMapping(path = "/eip1559/{privateKey}")
   SubmitTransactionResponse submitTransaction(
       @Parameter(description = "private key to use to sign the transaction") @PathVariable
           String privateKey,
-      @RequestBody final EIP1559Transaction transaction);
+      @Valid @RequestBody final EIP1559Transaction transaction);
 }
