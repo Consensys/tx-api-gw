@@ -4,6 +4,7 @@ import java.math.BigInteger;
 import javax.validation.constraints.NotNull;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -24,6 +25,7 @@ public class EIP1559Transaction extends Transaction {
   @NotNull
   private BigInteger feecap;
 
+  @Builder(builderMethodName = "eip1559Builder")
   public EIP1559Transaction(
       final BigInteger nonce,
       final String to,
