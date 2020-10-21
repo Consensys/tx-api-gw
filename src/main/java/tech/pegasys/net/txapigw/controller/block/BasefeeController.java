@@ -17,6 +17,6 @@ public class BasefeeController implements BasefeeAPI {
   }
 
   public @ResponseBody GetBasefeeResponse getBaseFee(final String block) {
-    return new GetBasefeeResponse(rpcClient.getBasefee(block != null ? block : "latest"));
+    return new GetBasefeeResponse(rpcClient.getBasefee(block));
   }
 }
