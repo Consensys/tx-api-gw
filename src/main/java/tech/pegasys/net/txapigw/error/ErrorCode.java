@@ -2,8 +2,7 @@ package tech.pegasys.net.txapigw.error;
 
 public enum ErrorCode {
   DEFAULT(-1),
-  ETHEREUM_CLIENT_ERROR(-1000),
-  INVALID_TRANSACTION(-2000);
+  ETHEREUM_CLIENT_ERROR(-1000);
 
   private final int code;
   private final String label;
