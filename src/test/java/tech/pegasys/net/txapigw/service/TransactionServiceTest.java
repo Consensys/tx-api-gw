@@ -81,7 +81,8 @@ public class TransactionServiceTest {
             invocation -> {
               throw new IOException("cannot connect to Ethereum client");
             });
-    assertThatThrownBy(() -> service.submit(PRIVATE_KEY, Transaction.builder().build()))
+    final Transaction transaction = Transaction.builder().build();
+    assertThatThrownBy(() -> service.submit(PRIVATE_KEY, transaction))
         .isInstanceOf(TxApiGwException.class)
         .hasMessage("cannot connect to Ethereum client");
   }
@@ -118,8 +119,8 @@ public class TransactionServiceTest {
             invocation -> {
               throw new IOException("cannot connect to Ethereum client");
             });
-    assertThatThrownBy(
-            () -> service.submit(PRIVATE_KEY, EIP1559Transaction.eip1559Builder().build()))
+    final EIP1559Transaction transaction = EIP1559Transaction.eip1559Builder().build();
+    assertThatThrownBy(() -> service.submit(PRIVATE_KEY, transaction))
         .isInstanceOf(TxApiGwException.class)
         .hasMessage("cannot connect to Ethereum client");
   }

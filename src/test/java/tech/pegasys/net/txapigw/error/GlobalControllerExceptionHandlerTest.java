@@ -48,4 +48,17 @@ public class GlobalControllerExceptionHandlerTest {
         .andExpect(jsonPath("$.errorLabel", is("DEFAULT")))
         .andExpect(jsonPath("$.errorMessage", is("error message")));
   }
+
+  @Test
+  public void testGlobalExceptionHandlerErrorAnotherMethod() throws Exception {
+
+    Mockito.when(controller.getBaseFee("0x10"))
+        .thenThrow(new TxApiGwException(ErrorCode.DEFAULT, new RuntimeException("error message")));
+    mockMvc
+        .perform(get("/basefee/{block}", "0x10"))
+        .andExpect(status().is(HttpStatus.INTERNAL_SERVER_ERROR.value()))
+        .andExpect(jsonPath("$.errorCode", is(-1)))
+        .andExpect(jsonPath("$.errorLabel", is("DEFAULT")))
+        .andExpect(jsonPath("$.errorMessage", is("error message")));
+  }
 }
