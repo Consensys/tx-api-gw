@@ -10,6 +10,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import tech.pegasys.net.txapigw.error.ErrorCode;
+import tech.pegasys.net.txapigw.error.TxApiGwException;
 
 @Slf4j
 public class RPCClient {
@@ -57,7 +59,7 @@ public class RPCClient {
           .read("$.result.baseFee");
     } catch (final Exception e) {
       log.error("error retrieving base fee", e);
-      return null;
+      throw new TxApiGwException(ErrorCode.ETHEREUM_CLIENT_ERROR, e);
     }
   }
 }

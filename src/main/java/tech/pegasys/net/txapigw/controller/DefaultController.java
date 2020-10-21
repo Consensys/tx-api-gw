@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Hidden
 @RestController
-public class XDefaultController {
+public class DefaultController {
 
   @RequestMapping(value = "/")
   public void redirect(HttpServletResponse response) throws IOException {

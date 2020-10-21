@@ -1,6 +1,7 @@
 package tech.pegasys.net.txapigw.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
@@ -23,6 +24,7 @@ import org.web3j.protocol.core.Request;
 import org.web3j.protocol.core.methods.response.EthSendTransaction;
 import org.web3j.utils.Numeric;
 import tech.pegasys.net.txapigw.api.response.transaction.SubmitTransactionResponse;
+import tech.pegasys.net.txapigw.error.TxApiGwException;
 import tech.pegasys.net.txapigw.model.EIP1559Transaction;
 import tech.pegasys.net.txapigw.model.Transaction;
 
@@ -71,6 +73,20 @@ public class TransactionServiceTest {
   }
 
   @Test
+  public void givenIOException_whenSubmit_thenThrowTxApiGwException() {
+    given(signer.sign(eq(PRIVATE_KEY), any(Transaction.class)))
+        .willReturn(Numeric.hexStringToByteArray(SIGNED_TX));
+    given(web3.ethSendRawTransaction(anyString()))
+        .willAnswer(
+            invocation -> {
+              throw new IOException("cannot connect to Ethereum client");
+            });
+    assertThatThrownBy(() -> service.submit(PRIVATE_KEY, Transaction.builder().build()))
+        .isInstanceOf(TxApiGwException.class)
+        .hasMessage("cannot connect to Ethereum client");
+  }
+
+  @Test
   public void givenValidEIP1559Tx_whenSubmit_thenReturnTxHash() throws IOException {
     given(signer.sign(eq(PRIVATE_KEY), any(EIP1559Transaction.class)))
         .willReturn(Numeric.hexStringToByteArray(SIGNED_TX));
@@ -91,5 +107,20 @@ public class TransactionServiceTest {
                     .feecap(BigInteger.valueOf(1000000000))
                     .build()))
         .isEqualToComparingFieldByField(new SubmitTransactionResponse(TX_HASH));
+  }
+
+  @Test
+  public void givenIOException_whenSubmitEIP1559Tx_thenThrowTxApiGwException() {
+    given(signer.sign(eq(PRIVATE_KEY), any(EIP1559Transaction.class)))
+        .willReturn(Numeric.hexStringToByteArray(SIGNED_TX));
+    given(web3.ethSendRawTransaction(anyString()))
+        .willAnswer(
+            invocation -> {
+              throw new IOException("cannot connect to Ethereum client");
+            });
+    assertThatThrownBy(
+            () -> service.submit(PRIVATE_KEY, EIP1559Transaction.eip1559Builder().build()))
+        .isInstanceOf(TxApiGwException.class)
+        .hasMessage("cannot connect to Ethereum client");
   }
 }

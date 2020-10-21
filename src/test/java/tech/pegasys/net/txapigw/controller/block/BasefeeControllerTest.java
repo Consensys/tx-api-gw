@@ -40,7 +40,7 @@ public class BasefeeControllerTest {
   public void givenBasefee_whenGetBasefeeAtGivenBlock_thenReturnJson() throws Exception {
     given(rpcClient.getBasefee("0x10")).willReturn("0x5678");
 
-    mvc.perform(get("/basefee/0x10").contentType(MediaType.APPLICATION_JSON))
+    mvc.perform(get("/basefee/{block}", "0x10").contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().isOk())
         .andExpect(jsonPath("$.baseFee", is("0x5678")));
   }

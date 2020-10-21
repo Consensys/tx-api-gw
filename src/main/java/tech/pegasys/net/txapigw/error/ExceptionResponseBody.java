@@ -1,9 +1,11 @@
 package tech.pegasys.net.txapigw.error;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@Data
+@Getter
+@NoArgsConstructor
 @AllArgsConstructor
 public class ExceptionResponseBody {
   private int errorCode;

@@ -10,6 +10,7 @@ import okhttp3.HttpUrl;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import org.junit.Test;
+import tech.pegasys.net.txapigw.error.TxApiGwException;
 
 public class RPCClientTest {
 
@@ -83,6 +84,19 @@ public class RPCClientTest {
             new MockResponse().setBody("{\"result\": {\"baseFee\": \"0x505a43c\"}}"),
             rpcClient -> rpcClient.getBasefeeAsLong("0x12"));
     assertThat(baseFee).isEqualTo(84255804);
+  }
+
+  @Test
+  public void givenInvalidJSON_whenGetBasefee_thenExceptionIsThrown() throws IOException {
+    final MockWebServer server = new MockWebServer();
+    server.enqueue(new MockResponse().setBody("{"));
+    server.start();
+    final HttpUrl baseUrl = server.url("/");
+    final RPCClient client = new RPCClient(baseUrl.url().toString());
+    assertThatThrownBy(() -> client.getBasefee("0x10"))
+        .isInstanceOf(TxApiGwException.class)
+        .hasMessageContaining("Unexpected End Of File");
+    server.shutdown();
   }
 
   private <T> T call(final MockResponse response, final Function<RPCClient, T> function)

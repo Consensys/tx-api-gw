@@ -1,10 +1,10 @@
 package tech.pegasys.net.txapigw.api.response.transaction;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 
-@Data
 @AllArgsConstructor
+@Getter
 public class SubmitTransactionResponse {
   private String transactionHash;
 }
