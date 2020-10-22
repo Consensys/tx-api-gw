@@ -1,7 +1,6 @@
 [![tx-api-gw Actions Status](https://github.com/abdelhamidbakhta/tx-api-gw/workflows/tx-api-gw-ci/badge.svg)](https://github.com/abdelhamidbakhta/tx-api-gw/actions)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=abdelhamidbakhta_tx-api-gw&metric=alert_status)](https://sonarcloud.io/dashboard?id=abdelhamidbakhta_tx-api-gw)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/abdelhamidbakhta/tx-api-gw/blob/master/LICENSE)
-<img src="https://sonarcloud.io/images/project_badges/sonarcloud-white.svg" alt="SonarCloud" width="100" >
+[![sonar-quality-gate][sonar-quality-gate]][sonar-url] [![sonar-coverage][sonar-coverage]][sonar-url] [![sonar-bugs][sonar-bugs]][sonar-url] [![sonar-vulnerabilities][sonar-vulnerabilities]][sonar-url]
 # Transaction API Gateway
 
 ## Description
@@ -91,3 +90,9 @@ docker run -p 8080:8080 -t $IMAGE_NAME
 ```shell script
 docker run -p 8080:8080 abdelhamidbakhtaconsensys/tx-api-gw:latest
 ```
+
+[sonar-url]: https://sonarcloud.io/dashboard?id=abdelhamidbakhta_tx-api-gw
+[sonar-quality-gate]: https://sonarcloud.io/api/project_badges/measure?project=abdelhamidbakhta_tx-api-gw&metric=alert_status
+[sonar-coverage]: https://sonarcloud.io/api/project_badges/measure?project=abdelhamidbakhta_tx-api-gw&metric=coverage
+[sonar-bugs]: https://sonarcloud.io/api/project_badges/measure?project=abdelhamidbakhta_tx-api-gw&metric=bugs
+[sonar-vulnerabilities]: https://sonarcloud.io/api/project_badges/measure?project=abdelhamidbakhta_tx-api-gw&metric=vulnerabilities
