@@ -21,7 +21,7 @@ public class TransactionSigner {
     return TransactionEncoder.signMessage(etherTransaction, Credentials.create(privateKey));
   }
 
-  public byte[] sign(final String privateKey, final EIP1559Transaction transaction) {
+  public byte[] signEIP1559(final String privateKey, final EIP1559Transaction transaction) {
     final RawTransaction etherTransaction =
         RawTransaction.createEtherTransaction(
             transaction.getNonce(),
