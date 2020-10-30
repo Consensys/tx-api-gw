@@ -69,7 +69,7 @@ public class TxControllerTest {
                 .content("{\"unknownField\": 1}")
                 .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().is(HttpStatus.BAD_REQUEST.value()))
-        .andExpect(jsonPath("$.nonce", is("must not be null")));
+        .andExpect(jsonPath("$.gasLimit", is("must not be null")));
   }
 
   @Test
@@ -102,7 +102,7 @@ public class TxControllerTest {
                 .content("{\"unknownField\": 1}")
                 .contentType(MediaType.APPLICATION_JSON))
         .andExpect(status().is(HttpStatus.BAD_REQUEST.value()))
-        .andExpect(jsonPath("$.nonce", is("must not be null")));
+        .andExpect(jsonPath("$.minerBribe", is("must not be null")));
   }
 
   public static String asJsonString(final Object obj) {

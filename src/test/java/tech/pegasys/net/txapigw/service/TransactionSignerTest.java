@@ -33,7 +33,7 @@ public class TransactionSignerTest {
   @Test
   public void givenEIP1559Transaction_whenSign_thenReturnCorrectByteArray() {
     assertThat(
-            signer.sign(
+            signer.signEIP1559(
                 PRIVATE_KEY,
                 EIP1559Transaction.eip1559Builder()
                     .nonce(BigInteger.ONE)

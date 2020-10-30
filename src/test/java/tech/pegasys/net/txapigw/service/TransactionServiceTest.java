@@ -21,6 +21,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.web3j.protocol.Web3j;
 import org.web3j.protocol.core.Request;
+import org.web3j.protocol.core.methods.response.EthGetTransactionCount;
 import org.web3j.protocol.core.methods.response.EthSendTransaction;
 import org.web3j.utils.Numeric;
 import tech.pegasys.net.txapigw.api.response.transaction.SubmitTransactionResponse;
@@ -73,9 +74,17 @@ public class TransactionServiceTest {
   }
 
   @Test
-  public void givenIOException_whenSubmit_thenThrowTxApiGwException() {
+  public void givenIOException_whenSubmit_thenThrowTxApiGwException() throws IOException {
     given(signer.sign(eq(PRIVATE_KEY), any(Transaction.class)))
         .willReturn(Numeric.hexStringToByteArray(SIGNED_TX));
+    final EthGetTransactionCount ethGetTransactionCountResponseMock =
+        mock(EthGetTransactionCount.class);
+    given(ethGetTransactionCountResponseMock.getTransactionCount()).willReturn(BigInteger.ONE);
+    final Request ethGetTransactionCountWeb3jRequestMock = mock(Request.class);
+    when(ethGetTransactionCountWeb3jRequestMock.send())
+        .thenReturn(ethGetTransactionCountResponseMock);
+    given(web3.ethGetTransactionCount(anyString(), any()))
+        .willReturn(ethGetTransactionCountWeb3jRequestMock);
     given(web3.ethSendRawTransaction(anyString()))
         .willAnswer(
             invocation -> {
@@ -89,7 +98,7 @@ public class TransactionServiceTest {
 
   @Test
   public void givenValidEIP1559Tx_whenSubmit_thenReturnTxHash() throws IOException {
-    given(signer.sign(eq(PRIVATE_KEY), any(EIP1559Transaction.class)))
+    given(signer.signEIP1559(eq(PRIVATE_KEY), any(EIP1559Transaction.class)))
         .willReturn(Numeric.hexStringToByteArray(SIGNED_TX));
     final EthSendTransaction responseMock = mock(EthSendTransaction.class);
     when(responseMock.getTransactionHash()).thenReturn(TX_HASH);
@@ -111,9 +120,14 @@ public class TransactionServiceTest {
   }
 
   @Test
-  public void givenIOException_whenSubmitEIP1559Tx_thenThrowTxApiGwException() {
-    given(signer.sign(eq(PRIVATE_KEY), any(EIP1559Transaction.class)))
+  public void givenIOException_whenSubmitEIP1559Tx_thenThrowTxApiGwException() throws IOException {
+    given(signer.signEIP1559(eq(PRIVATE_KEY), any(EIP1559Transaction.class)))
         .willReturn(Numeric.hexStringToByteArray(SIGNED_TX));
+    final EthGetTransactionCount responseMock = mock(EthGetTransactionCount.class);
+    given(responseMock.getTransactionCount()).willReturn(BigInteger.ONE);
+    final Request web3jRequestMock = mock(Request.class);
+    when(web3jRequestMock.send()).thenReturn(responseMock);
+    given(web3.ethGetTransactionCount(anyString(), any())).willReturn(web3jRequestMock);
     given(web3.ethSendRawTransaction(anyString()))
         .willAnswer(
             invocation -> {

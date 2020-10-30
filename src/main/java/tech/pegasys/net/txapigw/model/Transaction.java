@@ -20,7 +20,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 public class Transaction {
-  @NotNull private BigInteger nonce;
+  private BigInteger nonce;
 
   @Schema(
       example = "0x61aCB88dA0DBA1A43592f7cc548b3319Fa615e1b",
